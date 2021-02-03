@@ -4,6 +4,7 @@
 #include <string.h>
 
 #define maxn 100
+
 int sz=0;
 
 struct machine
@@ -346,20 +347,56 @@ void show_machine()
         if(i==id)
         {
             printf("Your Machine Info : \n");
-            printf("------------------------------------------\n");
+            printf("\t------------------------------------------\n");
             fscanf(fin,"%c",&c);
             fscanf(fin,"%d",&t);
-            printf("Machine Code : %d \n",t);
+            printf("\tMachine Code : %d ",t);
+            if(t==1)
+            {
+                printf("Taraash\n");
+            }
+            else if(t==2)
+            {
+                printf("Ferez\n");
+            }
+            else if(t==3)
+            {
+                printf("Sang\n");
+            }
+            else if(t==4)
+            {
+                printf("Drill\n");
+            }
+            else if(t==5)
+            {
+                printf("Safhe Taraash\n");
+            }
+            else if(t==6)
+            {
+                printf("Joosh\n");
+            }
+            else if(t==7)
+            {
+                printf("Press\n");
+            }
+            else if(t==8)
+            {
+                printf("Boresh\n");
+            }
+            else if(t==9)
+            {
+                printf("Navard\n");
+            }
             fscanf(fin,"%d",&x);
-            printf("Machine Repair Code : %d \n",x);
+            printf("\tMachine Repair Code : %d \n",x);
             fscanf(fin,"%d",&t);
-            printf("Machine Repair Period : %d \n",t);
+            printf("\tMachine Repair Period : %d \n",t);
             fscanf(fin," %c",&c);
-            printf("Machine Repair Type : %c \n",c);
+            printf("\tMachine Repair Type : %c \n",c);
             fgets(tmp,maxn,fin);
             fgets(b,maxn,fin);
-            printf("Machine Repair Description : \n%s",b);
-            printf("------------------------------------------\n");
+            printf("\tMachine Repair Description : \n\t%s",b);
+            printf("\t------------------------------------------\n");
         }
         else
         {
@@ -376,12 +413,93 @@ void show_machine()
     fclose(fin);
 }
 
-void show_plan(int m)
+void show_plan()
 {
-
+    int m;
+    printf("Please Enter Period In Month : ");
+    scanf("%d",&m);
+    for(int i=1;i<=m;i++)
+    {
+        FILE *fin=fopen("machines.dat","r");
+        printf("Month Number %d :\n\n",i);
+        for(int j=0;j<sz;j++)
+        {
+            struct machine cur;
+            int t;
+            char c;
+            char b[maxn];
+            char tmp[maxn];
+            int flag=0;
+            fscanf(fin,"%c",&c);
+            fscanf(fin,"%d",&t);
+            cur.code=t;
+            fscanf(fin,"%d",&t);
+            cur.repaircode=t;
+            fscanf(fin,"%d",&t);
+            cur.repairperiod=t;
+            if(i%cur.repairperiod==0)
+            {
+                flag=1;
+            }
+            fscanf(fin," %c",&c);
+            cur.repairtype=c;
+            fgets(tmp,maxn,fin);
+            fgets(b,maxn,fin);
+            strcpy(cur.repairdescription,b);
+            if(flag)
+            {
+                printf("\t------------------------------------------\n");
+                printf("\tMachine Code : %d ",cur.code);
+                if(cur.code==1)
+                {
+                    printf("Taraash\n");
+                }
+                else if(cur.code==2)
+                {
+                    printf("Ferez\n");
+                }
+                else if(cur.code==3)
+                {
+                    printf("Sang\n");
+                }
+                else if(cur.code==4)
+                {
+                    printf("Drill\n");
+                }
+                else if(cur.code==5)
+                {
+                    printf("Safhe Taraash\n");
+                }
+                else if(cur.code==6)
+                {
+                    printf("Joosh\n");
+                }
+                else if(cur.code==7)
+                {
+                    printf("Press\n");
+                }
+                else if(cur.code==8)
+                {
+                    printf("Boresh\n");
+                }
+                else if(cur.code==9)
+                {
+                    printf("Navard\n");
+                }
+                printf("\tMachine Repair Code : %d \n",cur.repaircode);
+                printf("\tMachine Repair Period : %d \n",cur.repairperiod);
+                printf("\tMachine Repair Type : %c \n",cur.repairtype);
+                printf("\tMachine Repair Description : \n\t%s",cur.repairdescription);
+                printf("\t------------------------------------------\n\n");
+            }
+        }
+        fclose(fin);
+    }
+    
 }
 
 int main()
 {
-    
+    sz=5;
+    show_machine();
 }
