@@ -75,7 +75,58 @@ void add_machine()
     sz++;
 }
 
+int find_machine(int code)
+{
+    FILE *fin=fopen("machines.dat","r");
+    int t;
+    char c;
+    int x;
+    char b[maxn];
+    char tmp[maxn];
+    for(int i=0;i<sz;i++)
+    {
+        fscanf(fin,"%c",&c);
+        fscanf(fin,"%d",&t);
+        fscanf(fin,"%d",&x);
+        fscanf(fin,"%d",&t);
+        fscanf(fin," %c",&c);
+        fgets(tmp,maxn,fin);
+        fgets(b,maxn,fin);
+        if(x==code)
+        {
+            fclose(fin);
+            return i;
+        }
+    }
+    fclose(fin);
+    return -1;
+}
+
+void edit_machine()
+{
+    printf("Please Enter Your Machine Repair Code : ");
+    int x;
+    scanf("%d",&x);
+}
+
+void delete_machine()
+{
+    printf("Please Enter Your Machine Repair Code : ");
+    int x;
+    scanf("%d",&x);
+}
+
+void show_machine()
+{
+    printf("Please Enter Your Machine Repair Code : ");
+    int x;
+    scanf("%d",&x);
+}
+
 int main()
 {
-    
+    int code;
+    sz=5;
+    scanf("%d",&code);
+    printf("%d",find_machine(code));
 }
