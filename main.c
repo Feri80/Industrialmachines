@@ -320,6 +320,5 @@ void show_machine()
 
 int main()
 {
-    sz=5;
-    edit_machine();
+    
 }
