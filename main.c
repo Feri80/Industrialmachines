@@ -49,6 +49,10 @@ void add_machine()
         c=toupper(c);
     }while(c!='M' && c!='E' && c!='I');
     new_machine.repairtype=c;
+    for(int i=0;i<maxn-strlen(new_machine.repairdescription);i++)
+    {
+        strcat(new_machine.repairdescription," ");
+    }
     if(sz==0)
     {
         FILE *fo=fopen("machines.dat","w");
@@ -244,7 +248,12 @@ void edit_machine()
     fprintf(fedit,"%d\n",info.repaircode);
     fprintf(fedit,"%d\n",info.repairperiod);
     fprintf(fedit,"%c\n",info.repairtype);
-    fprintf(fedit,"%s",info.repairdescription);
+    for(int i=0;i<maxn-strlen(info.repairdescription);i++)
+    {
+       strcat(info.repairdescription," ");
+    }
+    fputs(info.repairdescription,fedit);
+    fclose(fedit);
     printf("Edited Successfully \n");
 }
 
@@ -316,6 +325,60 @@ void show_machine()
     printf("Please Enter Your Machine Repair Code : ");
     int x;
     scanf("%d",&x);
+    int id=find_machine(x);
+    if(id==-1)
+    {
+        printf("Can't Find This Machine \n");
+        return;
+    }
+    FILE *fin=fopen("machines.dat","r");
+    if(fin==NULL)
+    {
+        printf("Can't Find Files \n");
+        return;
+    }
+    int t;
+    char c;
+    char b[maxn];
+    char tmp[maxn];
+    for(int i=0;i<sz;i++)
+    {
+        if(i==id)
+        {
+            printf("Your Machine Info : \n");
+            printf("------------------------------------------\n");
+            fscanf(fin,"%c",&c);
+            fscanf(fin,"%d",&t);
+            printf("Machine Code : %d \n",t);
+            fscanf(fin,"%d",&x);
+            printf("Machine Repair Code : %d \n",x);
+            fscanf(fin,"%d",&t);
+            printf("Machine Repair Period : %d \n",t);
+            fscanf(fin," %c",&c);
+            printf("Machine Repair Type : %c \n",c);
+            fgets(tmp,maxn,fin);
+            fgets(b,maxn,fin);
+            printf("Machine Repair Description : \n%s",b);
+            printf("------------------------------------------\n");
+        }
+        else
+        {
+            fscanf(fin,"%c",&c);
+            fscanf(fin,"%d",&t);
+            fscanf(fin,"%d",&x);
+            fscanf(fin,"%d",&t);
+            fscanf(fin," %c",&c);
+            fgets(tmp,maxn,fin);
+            fgets(b,maxn,fin);
+        }
+        
+    }
+    fclose(fin);
+}
+
+void show_plan(int m)
+{
+
 }
 
 int main()
