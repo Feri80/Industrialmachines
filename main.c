@@ -125,8 +125,5 @@ void show_machine()
 
 int main()
 {
-    int code;
-    sz=5;
-    scanf("%d",&code);
-    printf("%d",find_machine(code));
+    
 }
