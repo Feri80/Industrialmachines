@@ -500,6 +500,43 @@ void show_plan()
 
 int main()
 {
-    sz=5;
-    show_machine();
+    int x;
+    do
+    {
+        printf("Please Choose An Option : \n1)Add A New Machine\n2)Edit An Existing Machine\n3)Delete An Existing Machine\n4)Show A Machine Info\n5)Repair Planing\n6)Exit\n");
+        scanf("%d",&x);
+        if(x==1)
+        {
+            add_machine();
+        }
+        else if(x==2)
+        {
+            edit_machine();
+        }
+        else if(x==3)
+        {
+            delete_machine();
+        }
+        else if(x==4)
+        {
+            show_machine();
+        }
+        else if(x==5)
+        {
+            show_plan();
+        }
+        else if(x==6)
+        {
+            return 0;
+        }
+        else
+        {
+            char tmp[1];
+            gets(tmp);
+            continue;
+        }
+
+    }while(x!=6);
+    
+    
 }
